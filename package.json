@@ -1,6 +1,6 @@
 {
   "name": "bswap-wasm",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "bswap in WASM by using rotates",
   "main": "index.js",
   "devDependencies": {
@@ -14,9 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/emilbayes/bswap-wasm.git"
   },
-  "keywords": [
-
-  ],
+  "keywords": [],
   "author": "Emil Bay <github@tixz.dk>",
   "license": "ISC",
   "bugs": {
