@@ -1,0 +1,26 @@
+{
+  "name": "bswap-wasm",
+  "version": "0.0.0",
+  "description": "bswap in WASM by using rotates",
+  "main": "index.js",
+  "devDependencies": {
+    "wat2js": "^2.1.1",
+    "wat2wasm": "^3.0.0"
+  },
+  "scripts": {
+    "postinstall": "wat2js bswap.wat -o=bswap.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emilbayes/bswap-wasm.git"
+  },
+  "keywords": [
+
+  ],
+  "author": "Emil Bay <github@tixz.dk>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emilbayes/bswap-wasm/issues"
+  },
+  "homepage": "https://github.com/emilbayes/bswap-wasm#readme"
+}
