@@ -16,14 +16,14 @@ middle:
 ```
 01 02 03 04 05 06 07 08  Initial
 -----------------------
-00 00 00 00 00 00 00 01  Shift right 7 bytes
-00 00 00 00 00 00 02 00  Shift right 5 bytes, mask 2nd byte
-00 00 00 00 00 03 00 00  Shift right 3 bytes, mask 3nd byte
-00 00 00 00 04 00 00 00  Shift right 1 byte, mask 4nd byte
-00 00 00 05 00 00 00 00  Mask 4nd byte, shift left 1 byte
-00 00 06 00 00 00 00 00  Mask 3nd byte, shift left 3 byte
-00 07 00 00 00 00 00 00  Mask 2nd byte, shift left 5 byte
-08 00 00 00 00 00 00 00  Shift left 7 bytes
+__ __ __ __ __ __ __ 01  Shift right 7 bytes
+__ __ __ __ __ __ 02 __  Shift right 5 bytes, mask 2nd byte
+__ __ __ __ __ 03 __ __  Shift right 3 bytes, mask 3nd byte
+__ __ __ __ 04 __ __ __  Shift right 1 byte, mask 4nd byte
+__ __ __ 05 __ __ __ __  Mask 4nd byte, shift left 1 byte
+__ __ 06 __ __ __ __ __  Mask 3nd byte, shift left 3 byte
+__ 07 __ __ __ __ __ __  Mask 2nd byte, shift left 5 byte
+08 __ __ __ __ __ __ __  Shift left 7 bytes
 -----------------------
 08 07 06 05 04 03 02 01 Result by or'ing all intermediates
 ```
@@ -61,11 +61,11 @@ rotation does not matter as the technique is symmetric around the middle:
 ```
 01 02 03 04
 -----------
-00 02 00 04  Mask odd bytes
-04 00 02 00  Rotate 1 byte
+__ 02 __ 04  Mask odd bytes
+04 __ 02 __  Rotate 1 byte
 
-01 00 03 00  Mask even bytes
-00 03 00 01  Rotate 1 byte
+01 __ 03 __  Mask even bytes
+__ 03 __ 01  Rotate 1 byte
 -----------
 04 03 02 01  Or everything
 ```
@@ -95,19 +95,19 @@ two steps, but we are basically applying the technique above recursively:
 ```
 01 02 03 04 05 06 07 08
 -----------------------
-01 02 00 00 05 06 00 00  Mask odd byte pairs
-00 00 05 06 00 00 01 02  Rotate left 2 bytes
+01 02 __ __ 05 06 __ __  Mask odd byte pairs
+__ __ 05 06 __ __ 01 02  Rotate left 2 bytes
 
-00 00 03 04 00 00 07 08  Mask even byte pairs
-07 08 00 00 03 04 00 00  Rotate right 2 bytes
+__ __ 03 04 __ __ 07 08  Mask even byte pairs
+07 08 __ __ 03 04 __ __  Rotate right 2 bytes
 
 07 08 05 06 03 04 01 02  or and store
 
-00 08 00 06 00 04 00 02  Mask odd bytes
-08 00 06 00 04 00 02 00  Rotate left 1 byte
+__ 08 __ 06 __ 04 __ 02  Mask odd bytes
+08 __ 06 __ 04 __ 02 __  Rotate left 1 byte
 
-07 00 05 00 03 00 01 00  Mask even bytes
-00 07 00 05 00 03 00 01  Rotate right 1 byte
+07 __ 05 __ 03 __ 01 __  Mask even bytes
+__ 07 __ 05 __ 03 __ 01  Rotate right 1 byte
 -----------------------
 08 07 06 05 04 03 02 01  Or everything
 ```
